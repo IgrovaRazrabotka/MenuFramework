@@ -1,9 +1,9 @@
 # MenuFramework
 Това е малка система, която представлява меню "рамка"/"фреймуърк" и може да се използва за основа.
 
-Сустемата създава Settings.ini файл в който се съдържат настройките направени от играча по време на игра, в папка Saved.
+Системата създава Settings.ini файл в който се съдържат настройките направени от играча по време на игра, в папка Saved.
 Папката се намира на различни места спрямо това дали играете от двигателя / енджина или играете от построена / билдната игра.
-Директориите ще намерите сами след като пуснете играта за първи път. Ако този файл бъде изтрит играта го създава наново. Файлът се създава наново също когато структурата му бъде нарушена.
+Директориите ще намерите сами след като пуснете играта за първи път. Ако този файл бъде изтрит играта го създава наново. Файлът се създава наново също когато структурата му бъде нарушена, както и при невалидна информация.
 
 За боравене с меню системата имайте предвид следните клавиши:
 В,А,С,Д,Стрелка нагоре, Стрелка надолу, Стрелка наляво, Стрелка надясно. Ескейп, Ентър.
@@ -25,7 +25,7 @@ In order to use the system you need to know the following keyboard keys:
 W,A,S,D, Upper arrow, Downward arrow, Left Arrow, Right Arrow, Escape, Enter
 
 The mouse or any mouse key input is purposefully left out.
-Under each and every menu there is tips on what buttons work for each menu.
+Under each and every menu there are tips on what keys work for each menu.
 You can use this system in any way and for whatsoever purpose you wish to.
 The system has been build using Unreal Engine - 4.21 and has not been tested on any successive versions.
 
