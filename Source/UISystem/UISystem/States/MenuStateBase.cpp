@@ -24,7 +24,7 @@ UMenuStateBase* UMenuStateBase::HandleInput(const FKeyEvent& InKeyEvent, UUserWi
 	return nullptr;
 }
 
-void UMenuStateBase::Enter() {
+void UMenuStateBase::Enter(UMenuStateBase* _PreviousState) {
 
 }
 

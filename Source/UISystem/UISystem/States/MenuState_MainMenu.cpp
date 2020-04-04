@@ -63,7 +63,7 @@ UMenuStateBase* UMenuState_MainMenu::HandleInput(const FKeyEvent& InKeyEvent, UU
 	return nullptr;
 }
 
-void UMenuState_MainMenu::Enter()
+void UMenuState_MainMenu::Enter(UMenuStateBase* _PreviousState)
 {
 	if (UMenuMemory* Memory = GI->GetMenuMemory()) {
 		CurrentIndex = Memory->LastMainMenuIndex;

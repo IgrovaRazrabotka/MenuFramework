@@ -8,7 +8,7 @@
 #include "CustomGameInstance.h"
 
 
-void UMenuState_NewGame::Enter()
+void UMenuState_NewGame::Enter(UMenuStateBase* _PreviousState)
 {
 	// draw graphics here
 	if (UWidgetSwitcher* Switcher = Cast<UWidgetSwitcher>(MenuParentWidget->GetWidgetFromName("MenuSwitcher"))) {

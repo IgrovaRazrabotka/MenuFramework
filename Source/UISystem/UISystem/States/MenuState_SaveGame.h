@@ -17,7 +17,7 @@ class UISYSTEM_API UMenuState_SaveGame : public UMenuStateBase
 public:
 
 	virtual UMenuStateBase* HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget) override;
-	virtual void Enter() override;
+	virtual void Enter(UMenuStateBase* _PreviousState) override;
 
 private:
 	void DrawSavedGame(FString PathToFile, FString NameToDraw, int Index);

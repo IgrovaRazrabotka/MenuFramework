@@ -32,7 +32,7 @@ UMenuStateBase* UMenuState_NoMenu::HandleInput(const FKeyEvent& InKeyEvent, UUse
 	return nullptr;
 }
 
-void UMenuState_NoMenu::Enter()
+void UMenuState_NoMenu::Enter(UMenuStateBase* _PreviousState)
 {
 	// draw graphics here
 	if (UWidgetSwitcher* Switcher = Cast<UWidgetSwitcher>(MenuParentWidget->GetWidgetFromName("MenuSwitcher"))) {

@@ -16,5 +16,5 @@ class UISYSTEM_API UMenuState_JournalMenu : public UMenuStateBase
 	friend class UMenuStateFactory;
 public:
 	virtual UMenuStateBase* HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget) override;
-	virtual void Enter() override;
+	virtual void Enter(UMenuStateBase* _PreviousState) override;
 };

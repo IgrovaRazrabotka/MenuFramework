@@ -29,7 +29,7 @@ UMenuStateBase* UMenuState_JournalMenu::HandleInput(const FKeyEvent& InKeyEvent,
 	return nullptr;
 }
 
-void UMenuState_JournalMenu::Enter()
+void UMenuState_JournalMenu::Enter(UMenuStateBase* _PreviousState)
 {
 	// draw graphics here
 	if (UWidgetSwitcher* Switcher = Cast<UWidgetSwitcher>(MenuParentWidget->GetWidgetFromName("MenuSwitcher"))) {

@@ -20,7 +20,7 @@ void UMenu_Parent::MainMenuStartupSetup()
 {
 	if (bFirstStartup) {
 		State = GI->GetMenuStateFactory()->MakeMainMenuState(*this);
-		State->Enter();
+		State->Enter(nullptr);
 		bFirstStartup = false;
 	}
 }
@@ -29,7 +29,7 @@ void UMenu_Parent::GameplayStartupSetup()
 {
 	if (bFirstStartup) {
 		State = GI->GetMenuStateFactory()->MakeNoMenuState(*this);
-		State->Enter();
+		State->Enter(nullptr);
 		bFirstStartup = false;
 	}
 }
@@ -37,12 +37,14 @@ void UMenu_Parent::GameplayStartupSetup()
 FReply UMenu_Parent::NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
 {
 	UMenuStateBase* NewState = State->HandleInput(InKeyEvent,*this);
+	UMenuStateBase* PreviousState = nullptr;
 	if (NewState != nullptr) {
 		
 		State->Exit();
 
+		PreviousState = State;
 		State = NewState;
-		State->Enter();
+		State->Enter(PreviousState);
 	}
 	return FReply::Handled();
 }

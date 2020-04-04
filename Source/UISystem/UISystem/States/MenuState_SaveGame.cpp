@@ -59,7 +59,7 @@ void UMenuState_SaveGame::SaveGame(FString GameToSave) {
 	// nothing here for now
 }
 
-void UMenuState_SaveGame::Enter()
+void UMenuState_SaveGame::Enter(UMenuStateBase* _PreviousState)
 {
 	// draw graphics here
 	DrawSavedGame(GI->SavedGamesPaths.FindChecked(ESavedGame::ESavedGame0), "Saved Game 0", 0);

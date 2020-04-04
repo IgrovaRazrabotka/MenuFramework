@@ -17,6 +17,6 @@ class UISYSTEM_API UMenuState_PauseMenu : public UMenuStateBase
 public:
 
 	virtual UMenuStateBase* HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget) override;
-	virtual void Enter() override;
+	virtual void Enter(UMenuStateBase* _PreviousState) override;
 	virtual void Exit() override;
 };

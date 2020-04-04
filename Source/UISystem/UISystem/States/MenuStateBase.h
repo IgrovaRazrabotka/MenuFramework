@@ -24,7 +24,7 @@ public:
 	UUserWidget* MenuParentWidget;
 
 	virtual UMenuStateBase* HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget);
-	virtual void Enter();
+	virtual void Enter(UMenuStateBase* _PreviousState);
 	virtual void Exit();
 
 protected:

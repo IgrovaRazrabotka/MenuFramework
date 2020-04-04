@@ -17,5 +17,5 @@ class UISYSTEM_API UMenuState_QuitToMenu : public UMenuStateBase
 public:
 
 	virtual UMenuStateBase* HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget) override;
-	virtual void Enter() override;
+	virtual void Enter(UMenuStateBase* _PreviousState) override;
 };

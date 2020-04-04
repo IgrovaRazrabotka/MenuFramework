@@ -13,7 +13,12 @@ UMenuStateBase* UMenuState_Credits::HandleInput(const FKeyEvent& InKeyEvent, UUs
 
 	if (Input == MenuEscape) {
 
-		return GI->GetMenuStateFactory()->MakeMainMenuState(OwnerUserWidget);
+		if (Cast<UMenuState_MainMenu>(PreviousState)) {
+			return GI->GetMenuStateFactory()->MakeMainMenuState(OwnerUserWidget);
+		}
+		else if (Cast<UMenuState_PauseMenu>(PreviousState)) {
+			return GI->GetMenuStateFactory()->MakePauseMenuState(OwnerUserWidget);
+		}
 	}
 	else {
 
@@ -26,8 +31,9 @@ UMenuStateBase* UMenuState_Credits::HandleInput(const FKeyEvent& InKeyEvent, UUs
 	return nullptr;
 }
 
-void UMenuState_Credits::Enter()
+void UMenuState_Credits::Enter(UMenuStateBase* _PreviousState)
 {
+	PreviousState = _PreviousState;
 	// draw graphics here
 	if (UWidgetSwitcher* Switcher = Cast<UWidgetSwitcher>(MenuParentWidget->GetWidgetFromName("MenuSwitcher"))) {
 		Switcher->SetActiveWidget(MenuParentWidget->GetWidgetFromName("CreditsMenu"));

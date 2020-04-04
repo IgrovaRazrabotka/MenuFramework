@@ -29,7 +29,7 @@ UMenuStateBase* UMenuState_CharacterMenu::HandleInput(const FKeyEvent& InKeyEven
 	return nullptr;
 }
 
-void UMenuState_CharacterMenu::Enter()
+void UMenuState_CharacterMenu::Enter(UMenuStateBase* _PreviousState)
 {
 	// draw graphics here
 	if (UWidgetSwitcher* Switcher = Cast<UWidgetSwitcher>(MenuParentWidget->GetWidgetFromName("MenuSwitcher"))) {

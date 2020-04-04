@@ -8,7 +8,7 @@
 #include "CustomGameInstance.h"
 
 
-void UMenuState_ContinueGame::Enter()
+void UMenuState_ContinueGame::Enter(UMenuStateBase* _PreviousState)
 {
 	// draw graphics here
 

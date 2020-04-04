@@ -66,7 +66,12 @@ UMenuStateBase* UMenuState_Settings::HandleInput(const FKeyEvent& InKeyEvent, UU
 	}
 	else if (Input == MenuEscape) {
 
-		return GI->GetMenuStateFactory()->MakeMainMenuState(OwnerUserWidget);
+		if (Cast<UMenuState_MainMenu>(PreviousState)) {
+			return GI->GetMenuStateFactory()->MakeMainMenuState(OwnerUserWidget);
+		}
+		else if (Cast<UMenuState_PauseMenu>(PreviousState)) {
+			return GI->GetMenuStateFactory()->MakePauseMenuState(OwnerUserWidget);
+		}
 	}
 	else {
 
@@ -79,8 +84,10 @@ UMenuStateBase* UMenuState_Settings::HandleInput(const FKeyEvent& InKeyEvent, UU
 	return nullptr;
 }
 
-void UMenuState_Settings::Enter()
+void UMenuState_Settings::Enter(UMenuStateBase* _PreviousState)
 {
+	PreviousState = _PreviousState;
+
 	if (UMenuMemory* Memory = GI->GetMenuMemory()) {
 		CurrentIndex = Memory->LastSettingsMenuIndex;
 		SelectedGraphicsLevel = Memory->GetCurrentGraphicsLevel();

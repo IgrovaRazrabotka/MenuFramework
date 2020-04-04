@@ -27,7 +27,12 @@ UMenuStateBase* UMenuState_LoadGame::HandleInput(const FKeyEvent& InKeyEvent, UU
 	}
 	else if (Input == MenuEscape) {
 
-		return GI->GetMenuStateFactory()->MakeMainMenuState(OwnerUserWidget);
+		if (Cast<UMenuState_MainMenu>(PreviousState)) {
+			return GI->GetMenuStateFactory()->MakeMainMenuState(OwnerUserWidget);
+		}
+		else if (Cast<UMenuState_PauseMenu>(PreviousState)) {
+			return GI->GetMenuStateFactory()->MakePauseMenuState(OwnerUserWidget);
+		}
 	}
 	else {
 
@@ -60,8 +65,9 @@ void UMenuState_LoadGame::LoadGame(FString SavedGameToLoad) {
 	}
 }
 
-void UMenuState_LoadGame::Enter()
+void UMenuState_LoadGame::Enter(UMenuStateBase* _PreviousState)
 {
+	PreviousState = _PreviousState;
 	// draw graphics here
 	DrawSavedGame(GI->SavedGamesPaths.FindChecked(ESavedGame::ESavedGame0), "Saved Game 0", 0);
 	DrawSavedGame(GI->SavedGamesPaths.FindChecked(ESavedGame::ESavedGame1), "Saved Game 1", 1);

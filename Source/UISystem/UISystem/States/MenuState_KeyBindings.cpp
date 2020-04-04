@@ -53,7 +53,7 @@ UMenuStateBase* UMenuState_KeyBindings::HandleInput(const FKeyEvent& InKeyEvent,
 	return nullptr;
 }
 
-void UMenuState_KeyBindings::Enter()
+void UMenuState_KeyBindings::Enter(UMenuStateBase* _PreviousState)
 {
 	if (UMenuMemory* Memory = GI->GetMenuMemory()) {
 		CurrentIndex = Memory->LastKeyBindingsMenuIndex;

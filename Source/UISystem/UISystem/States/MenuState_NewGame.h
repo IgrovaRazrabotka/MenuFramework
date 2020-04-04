@@ -19,5 +19,5 @@ class UISYSTEM_API UMenuState_NewGame : public UMenuStateBase
 	friend class UMenuStateFactory;
 public:
 
-	virtual void Enter() override;
+	virtual void Enter(UMenuStateBase* _PreviousState) override;
 };

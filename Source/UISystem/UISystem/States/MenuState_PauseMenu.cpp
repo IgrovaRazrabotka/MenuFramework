@@ -69,7 +69,7 @@ UMenuStateBase* UMenuState_PauseMenu::HandleInput(const FKeyEvent& InKeyEvent, U
 	return nullptr;
 }
 
-void UMenuState_PauseMenu::Enter()
+void UMenuState_PauseMenu::Enter(UMenuStateBase* _PreviousState)
 {
 	if (UMenuMemory* Memory = GI->GetMenuMemory()) {
 		CurrentIndex = Memory->LastPauseMenuIndex;
