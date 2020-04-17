@@ -5,26 +5,20 @@
 #include "UISystem/States/MenuStateFactory.h"
 #include "WidgetSwitcher.h"
 #include "CustomGameInstance.h"
+#include "MenuState_MainMenu.h"
+#include "MenuState_PauseMenu.h"
 
 
-UMenuStateBase* UMenuState_Credits::HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget)
+UMenuStateBase* UMenuState_Credits::HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget)
 {
-	FString Input = InKeyEvent.GetKey().ToString();
 
-	if (Input == MenuEscape) {
+	if (Button == EMenuButton::ECancel) {
 
 		if (Cast<UMenuState_MainMenu>(PreviousState)) {
 			return GI->GetMenuStateFactory()->MakeMainMenuState(OwnerUserWidget);
 		}
 		else if (Cast<UMenuState_PauseMenu>(PreviousState)) {
 			return GI->GetMenuStateFactory()->MakePauseMenuState(OwnerUserWidget);
-		}
-	}
-	else {
-
-		if (GEngine != nullptr) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Input);
 		}
 	}
 

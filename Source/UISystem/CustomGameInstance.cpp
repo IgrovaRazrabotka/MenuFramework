@@ -91,3 +91,12 @@ FString UCustomGameInstance::GetLatestSavedGameFilePath() {
 	}
 	return LatestSavedGame;
 }
+
+void UCustomGameInstance::SetMenuParent(UMenu_Parent& Menu) {
+
+	MenuParentWidget = &Menu;
+}
+
+UMenu_Parent* UCustomGameInstance::GetMenuParent() {
+	return MenuParentWidget;
+}

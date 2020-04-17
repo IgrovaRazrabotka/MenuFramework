@@ -19,7 +19,7 @@ void UMenuStateBase::BeginPlay() {
 	GI = Cast<UCustomGameInstance>(UGameplayStatics::GetGameInstance(this));
 }
 
-UMenuStateBase* UMenuStateBase::HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget) {
+UMenuStateBase* UMenuStateBase::HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget) {
 
 	return nullptr;
 }

@@ -268,3 +268,11 @@ EShowSubtitles UMenuMemory::GetCurrentShowSubtitlesState() {
 
 	return ShowSubtitles;
 }
+
+void UMenuMemory::SetMenuState(EMenuState NewState) {
+	MenuState = NewState;
+}
+
+EMenuState UMenuMemory::GetMenuState() {
+	return MenuState;
+}

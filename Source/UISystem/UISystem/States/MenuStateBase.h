@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 #include "Widget.h"
+#include "UISystem/GlobalEnums.h"
 #include "MenuStateBase.generated.h"
 
 /**
@@ -23,7 +24,7 @@ public:
 	UPROPERTY()
 	UUserWidget* MenuParentWidget;
 
-	virtual UMenuStateBase* HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget);
+	virtual UMenuStateBase* HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget);
 	virtual void Enter(UMenuStateBase* _PreviousState);
 	virtual void Exit();
 

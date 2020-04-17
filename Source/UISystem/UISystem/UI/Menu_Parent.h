@@ -4,15 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
-
-#include "SizeBox.h"
-#include "UISystem/States/MenuStateBase.h"
+#include "UISystem/GlobalEnums.h"
 
 #include "Menu_Parent.generated.h"
 
 /**
  * 
  */
+
+class USizeBox;
+class UMenuStateBase;
+
 UCLASS()
 class UISYSTEM_API UMenu_Parent : public UUserWidget
 {
@@ -39,16 +41,13 @@ public:
 
 	virtual bool Initialize() override;
 
-protected:
-
-	UFUNCTION(BlueprintCallable)
 	virtual void MainMenuStartupSetup();
 
-	UFUNCTION(BlueprintCallable)
 	virtual void GameplayStartupSetup();
-
-	virtual FReply NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) override;
 	
+	virtual void OnMenuButtonDown(EMenuButton Button);// override; const FGeometry& InGeometry, const FKeyEvent& InKeyEvent
+protected:
+
 	UPROPERTY()
 	class UCustomGameInstance* GI;
 };

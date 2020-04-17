@@ -40,6 +40,9 @@ public:
 	void SetCurrentShowSubtitlesState(enum EShowSubtitles _ShowSubtitles);
 	void ApplyCurrentShowSubtitlesState();
 	EShowSubtitles GetCurrentShowSubtitlesState();
+
+	void SetMenuState(EMenuState NewState);
+	EMenuState GetMenuState();
 private:
 	//graphics
 	EGraphicsLevel GraphicsLevel = EGraphicsLevel::ELow;
@@ -51,6 +54,8 @@ private:
 
 	//subtitles
 	EShowSubtitles ShowSubtitles = EShowSubtitles::EShow;
+
+	EMenuState MenuState = EMenuState::EMainMenu;
 	
 protected:
 	UPROPERTY()

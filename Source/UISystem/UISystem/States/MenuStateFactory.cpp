@@ -1,6 +1,24 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "UISystem/States/MenuStateFactory.h"
+
+#include "UISystem/States/MenuState_MainMenu.h"
+#include "UISystem/States/MenuState_NewGame.h"
+#include "UISystem/States/MenuState_ContinueGame.h"
+#include "UISystem/States/MenuState_LoadGame.h"
+#include "UISystem/States/MenuState_Settings.h"
+#include "UISystem/States/MenuState_KeyBindings.h"
+#include "UISystem/States/MenuState_Credits.h"
+#include "UISystem/States/MenuState_Quit.h"
+
+#include "UISystem/States/MenuState_NoMenu.h"
+#include "UISystem/States/MenuState_PauseMenu.h"
+#include "UISystem/States/MenuState_SaveGame.h"
+#include "UISystem/States/MenuState_QuitToMenu.h"
+
+#include "UISystem/States/MenuState_CharacterMenu.h"
+#include "UISystem/States/MenuState_JournalMenu.h"
+
 #include "Engine.h"
 #include "WidgetTree.h"
 #include "UISystem/States/MenuStateBase.h"

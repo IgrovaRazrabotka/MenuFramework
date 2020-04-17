@@ -57,3 +57,19 @@ enum class ESettingsMenuSelection {
 	EShowSubtitles = 1,
 	EKeyBindings = 2
 };
+
+enum class EMenuButton {
+	EUp = 0,
+	EDown,
+	ELeft,
+	ERight,
+	EInteract,
+	ECancel,
+	ECharacter,
+	EJournal
+};
+
+enum class EMenuState {
+	EMainMenu = 0,
+	EGameplay
+};

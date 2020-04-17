@@ -4,26 +4,18 @@
 
 #include "WidgetSwitcher.h"
 #include "CustomGameInstance.h"
+#include "MenuState_NoMenu.h"
 
 
-UMenuStateBase* UMenuState_JournalMenu::HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget) {
+UMenuStateBase* UMenuState_JournalMenu::HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget) {
 
-	FString Input = InKeyEvent.GetKey().ToString();
-
-	if (Input == MenuEscape) {
-
-		return GI->GetMenuStateFactory()->MakeNoMenuState(OwnerUserWidget);
-	}
-	else if (Input == JournalMenu) {
+	if (Button == EMenuButton::ECancel) {
 
 		return GI->GetMenuStateFactory()->MakeNoMenuState(OwnerUserWidget);
 	}
-	else {
+	else if (Button == EMenuButton::EJournal) {
 
-		if (GEngine != nullptr) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Input);
-		}
+		return GI->GetMenuStateFactory()->MakeNoMenuState(OwnerUserWidget);
 	}
 
 	return nullptr;

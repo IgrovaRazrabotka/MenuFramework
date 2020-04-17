@@ -6,23 +6,26 @@
 #include "WidgetSwitcher.h"
 #include "UISystem/States/MenuMemory.h"
 #include "CustomGameInstance.h"
+#include "Components/TextBlock.h"
+#include "MenuState_KeyBindings.h"
+#include "MenuState_MainMenu.h"
+#include "MenuState_PauseMenu.h"
 
 
-UMenuStateBase* UMenuState_Settings::HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget)
+UMenuStateBase* UMenuState_Settings::HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget)
 {
-	FString Input = InKeyEvent.GetKey().ToString();
 
-	if (Input == MenuUp || Input == MenuUpAlt) {
+	if (Button == EMenuButton::EUp) {
 
 		DecrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuDown || Input == MenuDownAlt) {
+	else if (Button == EMenuButton::EDown) {
 
 		IncrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuRight || Input == MenuRightAlt) {
+	else if (Button == EMenuButton::ERight) {
 		
 		switch ((ESettingsMenuSelection)CurrentIndex) {
 		
@@ -35,7 +38,7 @@ UMenuStateBase* UMenuState_Settings::HandleInput(const FKeyEvent& InKeyEvent, UU
 		}
 		RedrawGraphics();
 	}
-	else if (Input == MenuLeft || Input == MenuLeftAlt) {
+	else if (Button == EMenuButton::ELeft) {
 		switch ((ESettingsMenuSelection)CurrentIndex) {
 		
 		case ESettingsMenuSelection::EGraphicsLevel:
@@ -48,7 +51,7 @@ UMenuStateBase* UMenuState_Settings::HandleInput(const FKeyEvent& InKeyEvent, UU
 		}
 		RedrawGraphics();
 	}
-	else if (Input == MenuConfirm) {
+	else if (Button == EMenuButton::EInteract) {
 
 		switch ((ESettingsMenuSelection)CurrentIndex) {
 		
@@ -64,20 +67,14 @@ UMenuStateBase* UMenuState_Settings::HandleInput(const FKeyEvent& InKeyEvent, UU
 
 		}
 	}
-	else if (Input == MenuEscape) {
+	else if (Button == EMenuButton::ECancel) {
 
-		if (Cast<UMenuState_MainMenu>(PreviousState)) {
+		if(GI->GetMenuMemory()->GetMenuState() == EMenuState::EMainMenu)
+		{
 			return GI->GetMenuStateFactory()->MakeMainMenuState(OwnerUserWidget);
 		}
-		else if (Cast<UMenuState_PauseMenu>(PreviousState)) {
+		else if (GI->GetMenuMemory()->GetMenuState() == EMenuState::EGameplay) {
 			return GI->GetMenuStateFactory()->MakePauseMenuState(OwnerUserWidget);
-		}
-	}
-	else {
-
-		if (GEngine != nullptr) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Input);
 		}
 	}
 

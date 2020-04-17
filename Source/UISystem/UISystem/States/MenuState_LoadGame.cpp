@@ -5,40 +5,34 @@
 #include "WidgetSwitcher.h"
 #include "HAL/FileManager.h"
 #include "CustomGameInstance.h"
+#include "MenuState_MainMenu.h"
+#include "MenuState_PauseMenu.h"
 
 
-UMenuStateBase* UMenuState_LoadGame::HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget)
+UMenuStateBase* UMenuState_LoadGame::HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget)
 {
-	FString Input = InKeyEvent.GetKey().ToString();
 
-	if (Input == MenuUp || Input == MenuUpAlt) {
+	if (Button == EMenuButton::EUp) {
 
 		DecrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuDown || Input == MenuDownAlt) {
+	else if (Button == EMenuButton::EDown) {
 
 		IncrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuConfirm) {
+	else if (Button == EMenuButton::EInteract) {
 		
 		LoadGame(GI->SavedGamesPaths.FindChecked((ESavedGame)CurrentIndex));
 	}
-	else if (Input == MenuEscape) {
+	else if (Button == EMenuButton::ECancel) {
 
 		if (Cast<UMenuState_MainMenu>(PreviousState)) {
 			return GI->GetMenuStateFactory()->MakeMainMenuState(OwnerUserWidget);
 		}
 		else if (Cast<UMenuState_PauseMenu>(PreviousState)) {
 			return GI->GetMenuStateFactory()->MakePauseMenuState(OwnerUserWidget);
-		}
-	}
-	else {
-
-		if (GEngine != nullptr) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Input);
 		}
 	}
 

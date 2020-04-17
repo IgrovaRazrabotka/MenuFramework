@@ -5,28 +5,28 @@
 #include "CoreMinimal.h"
 #include "UObject/NoExportTypes.h"
 
-#include "UISystem/States/MenuState_MainMenu.h"
-#include "UISystem/States/MenuState_NewGame.h"
-#include "UISystem/States/MenuState_ContinueGame.h"
-#include "UISystem/States/MenuState_LoadGame.h"
-#include "UISystem/States/MenuState_Settings.h"
-#include "UISystem/States/MenuState_KeyBindings.h"
-#include "UISystem/States/MenuState_Credits.h"
-#include "UISystem/States/MenuState_Quit.h"
-
-#include "UISystem/States/MenuState_NoMenu.h"
-#include "UISystem/States/MenuState_PauseMenu.h"
-#include "UISystem/States/MenuState_SaveGame.h"
-#include "UISystem/States/MenuState_QuitToMenu.h"
-
-#include "UISystem/States/MenuState_CharacterMenu.h"
-#include "UISystem/States/MenuState_JournalMenu.h"
-
 #include "MenuStateFactory.generated.h"
 
 /**
  * 
  */
+class UMenuState_MainMenu;
+class UMenuState_NewGame;
+class UMenuState_ContinueGame;
+class UMenuState_LoadGame;
+class UMenuState_Settings;
+class UMenuState_KeyBindings;
+class UMenuState_Credits;
+class UMenuState_Quit;
+
+class UMenuState_NoMenu;
+class UMenuState_PauseMenu;
+class UMenuState_SaveGame;
+class UMenuState_QuitToMenu;
+
+class UMenuState_CharacterMenu;
+class UMenuState_JournalMenu;
+
 UCLASS()
 class UISYSTEM_API UMenuStateFactory : public UObject
 {

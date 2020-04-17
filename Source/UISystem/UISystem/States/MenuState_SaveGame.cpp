@@ -6,36 +6,31 @@
 #include "WidgetSwitcher.h"
 #include "HAL/FileManager.h"
 #include "CustomGameInstance.h"
+#include "MenuState_PauseMenu.h"
+#include "Misc/Paths.h"
+#include "Components/TextBlock.h"
 
 
-UMenuStateBase* UMenuState_SaveGame::HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget)
+UMenuStateBase* UMenuState_SaveGame::HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget)
 {
-	FString Input = InKeyEvent.GetKey().ToString();
 
-	if (Input == MenuUp || Input == MenuUpAlt) {
+	if (Button == EMenuButton::EUp) {
 
 		DecrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuDown || Input == MenuDownAlt) {
+	else if (Button == EMenuButton::EDown) {
 
 		IncrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuConfirm) {
+	else if (Button == EMenuButton::EInteract) {
 
 		SaveGame(GI->SavedGamesPaths.FindChecked((ESavedGame)CurrentIndex));
 	}
-	else if (Input == MenuEscape) {
+	else if (Button == EMenuButton::ECancel) {
 
 		return GI->GetMenuStateFactory()->MakePauseMenuState(OwnerUserWidget);
-	}
-	else {
-
-		if (GEngine != nullptr) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Input);
-		}
 	}
 
 	return nullptr;

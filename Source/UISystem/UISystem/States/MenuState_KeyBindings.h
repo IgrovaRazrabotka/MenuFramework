@@ -20,7 +20,7 @@ class UISYSTEM_API UMenuState_KeyBindings : public UMenuStateBase
 	friend class UMenuStateFactory;
 public:
 
-	virtual UMenuStateBase* HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget) override;
+	virtual UMenuStateBase* HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget) override;
 	virtual void Enter(UMenuStateBase* _PreviousState) override;
 	virtual void Exit() override;
 	

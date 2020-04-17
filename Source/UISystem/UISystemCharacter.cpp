@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "CustomGameInstance.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AUISystemCharacter
@@ -45,10 +46,47 @@ AUISystemCharacter::AUISystemCharacter()
 
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
+
 }
 
 //////////////////////////////////////////////////////////////////////////
 // Input
+void AUISystemCharacter::BeginPlay() {
+
+	Super::BeginPlay();
+	GI = Cast<UCustomGameInstance>(GetGameInstance());
+}
+void AUISystemCharacter::GoForth() {
+	GI->GetMenuParent()->OnMenuButtonDown(EMenuButton::EUp);
+}
+
+void AUISystemCharacter::GoBack() {
+	GI->GetMenuParent()->OnMenuButtonDown(EMenuButton::EDown);
+}
+
+void AUISystemCharacter::GoLeft() {
+	GI->GetMenuParent()->OnMenuButtonDown(EMenuButton::ELeft);
+}
+
+void AUISystemCharacter::GoRight() {
+	GI->GetMenuParent()->OnMenuButtonDown(EMenuButton::ERight);
+}
+
+void AUISystemCharacter::Interact() {
+	GI->GetMenuParent()->OnMenuButtonDown(EMenuButton::EInteract);
+}
+
+void AUISystemCharacter::Cancel() {
+	GI->GetMenuParent()->OnMenuButtonDown(EMenuButton::ECancel);
+}
+
+void AUISystemCharacter::Character() {
+	GI->GetMenuParent()->OnMenuButtonDown(EMenuButton::ECharacter);
+}
+
+void AUISystemCharacter::Journal() {
+	GI->GetMenuParent()->OnMenuButtonDown(EMenuButton::EJournal);
+}
 
 void AUISystemCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
@@ -56,6 +94,15 @@ void AUISystemCharacter::SetupPlayerInputComponent(class UInputComponent* Player
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
+
+	PlayerInputComponent->BindAction("GoForth", IE_Released, this, &AUISystemCharacter::GoForth);
+	PlayerInputComponent->BindAction("GoBack", IE_Released, this, &AUISystemCharacter::GoBack);
+	PlayerInputComponent->BindAction("GoLeft", IE_Released, this, &AUISystemCharacter::GoLeft);
+	PlayerInputComponent->BindAction("GoRight", IE_Released, this, &AUISystemCharacter::GoRight);
+	PlayerInputComponent->BindAction("Interact", IE_Released, this, &AUISystemCharacter::Interact);
+	PlayerInputComponent->BindAction("Cancel", IE_Released, this, &AUISystemCharacter::Cancel);
+	PlayerInputComponent->BindAction("Character", IE_Released, this, &AUISystemCharacter::Character);
+	PlayerInputComponent->BindAction("Journal", IE_Released, this, &AUISystemCharacter::Journal);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &AUISystemCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AUISystemCharacter::MoveRight);

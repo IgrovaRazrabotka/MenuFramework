@@ -5,22 +5,30 @@
 #include "WidgetSwitcher.h"
 #include "UISystem/States/MenuMemory.h"
 #include "CustomGameInstance.h"
+#include "MenuState_NewGame.h"
+#include "MenuState_ContinueGame.h"
+#include "MenuState_SaveGame.h"
+#include "MenuState_LoadGame.h"
+#include "MenuState_Settings.h"
+#include "MenuState_Credits.h"
+#include "MenuState_QuitToMenu.h"
+#include "MenuState_Quit.h"
+#include "MenuState_NoMenu.h"
 
-UMenuStateBase* UMenuState_PauseMenu::HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget)
+UMenuStateBase* UMenuState_PauseMenu::HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget)
 {
-	FString Input = InKeyEvent.GetKey().ToString();
 
-	if (Input == MenuUp || Input == MenuUpAlt) {
+	if (Button == EMenuButton::EUp) {
 
 		DecrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuDown || Input == MenuDownAlt) {
+	else if (Button == EMenuButton::EDown) {
 
 		IncrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuConfirm) {
+	else if (Button == EMenuButton::EInteract) {
 
 		switch ((EPauseMenuSelection)CurrentIndex) {
 		case EPauseMenuSelection::ENewGame:
@@ -54,16 +62,9 @@ UMenuStateBase* UMenuState_PauseMenu::HandleInput(const FKeyEvent& InKeyEvent, U
 
 		}
 	}
-	else if (Input == MenuEscape) {
+	else if (Button == EMenuButton::ECancel) {
 
 		return GI->GetMenuStateFactory()->MakeNoMenuState(OwnerUserWidget);
-	}
-	else {
-
-		if (GEngine != nullptr) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Input);
-		}
 	}
 
 	return nullptr;

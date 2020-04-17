@@ -4,23 +4,28 @@
 #include "UISystem/States/MenuStateFactory.h"
 #include "WidgetSwitcher.h"
 #include "CustomGameInstance.h"
+#include "MenuState_NewGame.h"
+#include "MenuState_ContinueGame.h"
+#include "MenuState_LoadGame.h"
+#include "MenuState_Settings.h"
+#include "MenuState_Credits.h"
+#include "MenuState_Quit.h"
 
 
-UMenuStateBase* UMenuState_MainMenu::HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget)
+UMenuStateBase* UMenuState_MainMenu::HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget)
 {
-	FString Input = InKeyEvent.GetKey().ToString();
 
-	if (Input == MenuUp || Input == MenuUpAlt) {
+	if (Button == EMenuButton::EUp) {
 		
 		DecrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuDown || Input == MenuDownAlt) {
+	else if (Button == EMenuButton::EDown) {
 		
 		IncrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuConfirm) {
+	else if (Button == EMenuButton::EInteract) {
 
 		switch ((EMainMenuSelection)CurrentIndex) {
 		case EMainMenuSelection::ENewGame:
@@ -46,17 +51,6 @@ UMenuStateBase* UMenuState_MainMenu::HandleInput(const FKeyEvent& InKeyEvent, UU
 		case EMainMenuSelection::EQuit:
 			return GI->GetMenuStateFactory()->MakeQuitState(OwnerUserWidget);
 
-		}
-	}
-	else if (Input == MenuEscape) {
-
-
-	}
-	else {
-		
-		if (GEngine != nullptr) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Input);
 		}
 	}
 

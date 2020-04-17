@@ -18,6 +18,13 @@ class AUISystemCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	UPROPERTY()
+	class UCustomGameInstance* GI;
+
+protected:
+
+	void BeginPlay() override;
 public:
 	AUISystemCharacter();
 
@@ -30,6 +37,15 @@ public:
 	float BaseLookUpRate;
 
 protected:
+
+	void GoForth();
+	void GoBack();
+	void GoLeft();
+	void GoRight();
+	void Interact();
+	void Cancel();
+	void Character();
+	void Journal();
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();

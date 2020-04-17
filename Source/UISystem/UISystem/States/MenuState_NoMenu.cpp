@@ -3,30 +3,23 @@
 #include "UISystem/States/MenuState_NoMenu.h"
 #include "WidgetSwitcher.h"
 #include "CustomGameInstance.h"
+#include "MenuState_PauseMenu.h"
+#include "MenuState_CharacterMenu.h"
+#include "MenuState_JournalMenu.h"
 
+UMenuStateBase* UMenuState_NoMenu::HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget) {
 
-UMenuStateBase* UMenuState_NoMenu::HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget) {
-
-	FString Input = InKeyEvent.GetKey().ToString();
-
-	if (Input == MenuEscape) {
+	if (Button == EMenuButton::ECancel) {
 
 		return GI->GetMenuStateFactory()->MakePauseMenuState(OwnerUserWidget);
 	}
-	else if (Input == CharacterMenu) {
+	else if (Button == EMenuButton::ECharacter) {
 
 		return GI->GetMenuStateFactory()->MakeCharacterMenuState(OwnerUserWidget);
 	}
-	else if (Input == JournalMenu) {
+	else if (Button == EMenuButton::EJournal) {
 
 		return GI->GetMenuStateFactory()->MakeJournalMenuState(OwnerUserWidget);
-	}
-	else {
-
-		if (GEngine != nullptr) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Input);
-		}
 	}
 
 	return nullptr;

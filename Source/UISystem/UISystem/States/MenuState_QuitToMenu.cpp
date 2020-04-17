@@ -6,34 +6,21 @@
 #include "WidgetSwitcher.h"
 #include "Kismet/KismetSystemLibrary.h"
 #include "CustomGameInstance.h"
+#include "Kismet/GameplayStatics.h"
 
 
-UMenuStateBase* UMenuState_QuitToMenu::HandleInput(const FKeyEvent& InKeyEvent, UUserWidget& OwnerUserWidget)
+UMenuStateBase* UMenuState_QuitToMenu::HandleInput(EMenuButton Button, UUserWidget& OwnerUserWidget)
 {
-	FString Input = InKeyEvent.GetKey().ToString();
 
-	if (Input == MenuUp || Input == MenuUpAlt) {
+	if (Button == EMenuButton::EUp) {
 
 		DecrementIndex();
 		RedrawGraphics();
 	}
-	else if (Input == MenuDown || Input == MenuDownAlt) {
+	else if (Button == EMenuButton::EDown) {
 
 		IncrementIndex();
 		RedrawGraphics();
-	}
-	else if (Input == MenuConfirm) {
-
-	}
-	else if (Input == MenuEscape) {
-
-	}
-	else {
-
-		if (GEngine != nullptr) {
-
-			GEngine->AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, Input);
-		}
 	}
 
 	return nullptr;

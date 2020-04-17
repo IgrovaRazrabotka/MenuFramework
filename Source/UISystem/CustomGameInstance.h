@@ -7,6 +7,7 @@
 
 #include "UISystem/States/MenuStateFactory.h"
 #include "UISystem/States/MenuMemory.h"
+#include "UISystem/UI/Menu_Parent.h"
 
 #include "CustomGameInstance.generated.h"
 
@@ -30,6 +31,9 @@ public:
 	UMenuMemory* GetMenuMemory();
 	FString GetLatestSavedGameFilePath();
 
+	void SetMenuParent(UMenu_Parent& Menu);
+	UMenu_Parent* GetMenuParent();
+
 	FString SavedGamesPath;
 	FString IniFilePath;
 	FString NullSavedGame;
@@ -43,6 +47,8 @@ protected:
 	UMenuStateFactory* MenuStateFactory = nullptr;
 	UPROPERTY()
 	UMenuMemory* MenuMemory = nullptr;
+	UPROPERTY()
+	UMenu_Parent* MenuParentWidget = nullptr;
 	UWorld* World;
 
 };
